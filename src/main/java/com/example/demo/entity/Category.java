@@ -38,12 +38,16 @@ public class Category {
         this.id = id;
         this.name = name;
     }
+    @Builder
+    public Category(String name){
+        this.name = name;
+    }
 
     public Category(){
     }
-//    @Builder
-//    public void UpdateCategory(Long id, String name){
-//        this.id = id;
-//        this.name = name;
-//    }
+    @Builder
+    public void UpdateCategory(Long id, String name){
+        this.id = id;
+        this.name = name;
+    }
 }

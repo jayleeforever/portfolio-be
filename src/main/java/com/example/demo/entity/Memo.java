@@ -1,6 +1,7 @@
 package com.example.demo.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -28,4 +29,16 @@ public class Memo {
     // columnDefinition 은 타입을 지정해 줄 떄 사용한다. TEXT 는 사이즈 제한이 없는 텍스트를 저장할떄 사용된다.
     @Column(columnDefinition = "TEXT")
     String content;
+
+    @Builder
+    public Memo(Long id, String name, String content, Category category){
+        this.id = id;
+        this.name = name;
+        this.content = content;
+        this.category = category;
+    }
+
+    public Memo() {
+
+    }
 }
