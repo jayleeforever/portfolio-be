@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
+import com.example.demo.controller.dto.CategoryDTO;
 import com.example.demo.entity.Category;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -17,12 +19,12 @@ import java.util.Optional;
 // JpaRepository<Category, Long> 은 Jpa를 사용하겠다는 선언이다.
 // 기본적으로 findById findAll save delete 등의 메서드를 제공한다. 왼쪽에는 다루는 데이터의 타입, 오른쪽에는 id의 타입을 적어준다.
 public interface CategoryRepository extends JpaRepository<Category, Long> {
+//    @PersistenceContext
     // JPA는 findBy{프로퍼티이름}의 메서드를 만들면 자동으로 쿼리를 생성해 주는데
     // `Optional<Category> findByName(String name);` 은 파라미터 name과 같은 name을 가진 Category를 리턴해준다.
     // Optional Optional 은 Null과 Category를 가질 수 있는 객체이다.
     // Null Check를 위한 메서드들을 제공해 준다. isEmpty, elseOrThrow, isPresent 등
     Optional<Category> findByName(String name);
-
     //참고
     //https://www.javaguides.net/2019/07/spring-boot-save-findbyid-findall.html
     //    List<Category> findAll();
@@ -31,5 +33,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     //
     //Pageable을 파라미터로 넣으면 페이징 요청을 실행할 수 있고, Page를 리턴으로 받으면 페이지 정보가 포함된 리스트를 응답으로 보내줄 수 있다.
     Page<Category> findByNameContains(Pageable pageable, String name);
-
+    Category getCategoriesById(Long category_id);
 }

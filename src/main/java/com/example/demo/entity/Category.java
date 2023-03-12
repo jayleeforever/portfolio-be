@@ -1,5 +1,6 @@
 package com.example.demo.entity;
 
+import com.example.demo.controller.dto.CategoryDTO;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +10,7 @@ import lombok.ToString;
 // @Entity 를 적용하면 JPA에서는 해당 정보를 통해 데이터베이스 테이블을 생성하고,
 // 테이블의 데이터를 가져올 수 있게된다. 각 변수 하나하나가 데이터베이스 Colum이 된다.
 @Entity
-@Table(name = "category")
+//@Table(name = "category")
 // @Getter getId, getName 같은 메서드를 자동으로 만들어주는 어노테이션이다.
 // Entity에는 Get이 있어야 제대로 동작한다
 @Getter
@@ -17,7 +18,7 @@ import lombok.ToString;
 // http://localhost:8080/categories/1 요청시
 // 다음과 같은 에러나서 추가
 // No default constructor for entity:
-@NoArgsConstructor
+//@NoArgsConstructor
 public class Category {
     // @Id 는 PrimaryKey를 의미한다. id는 PrimaryKey가 된다.
     @Id
@@ -35,8 +36,16 @@ public class Category {
     // Category category = Category.builder().name("카테고리이름").build();
     // 생성자 파라미터를 한번에 넣을 필요가 없고 순서를 외울 필요가 없다.
     @Builder
-    public Category(String name){
+    public Category(Long id, String name){
+        this.id = id;
         this.name = name;
     }
 
+    public Category(){
+    }
+//    @Builder
+//    public void UpdateCategory(Long id, String name){
+//        this.id = id;
+//        this.name = name;
+//    }
 }

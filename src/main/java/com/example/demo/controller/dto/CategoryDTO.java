@@ -10,5 +10,6 @@ import lombok.Data;
 //    - getId, getName, setId, setName
 @Data
 public class CategoryDTO {
+    Long id;
     String name;
 }

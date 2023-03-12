@@ -56,8 +56,8 @@ public class UserController {
 //    }
 
     @DeleteMapping("/{id}")
-    public void deleteCategoryById(@PathVariable Long id) {
-        categoryService.deleteCategory(id);
+    public Long deleteCategoryById(@PathVariable Long id) {
+        return categoryService.deleteCategoryById(id);
     }
 
     //데이터를 하나씩 가져오기도 하지만 우리는 Data를 여러개를 가져오기도 한다 이때 사용하는 것이 페이징이다.
@@ -76,8 +76,13 @@ public class UserController {
     //
     //`Page` 는 페이지 정보가 포함된 데이터이다. JPA에서 생성한다.
     @GetMapping("")
-    public Page<Category> getCategories(Pageable pageable, @RequestParam String keyword){
+    public Page<Category> getCategories(Pageable pageable, @RequestParam(value="keyword", required=false) String keyword){
         return categoryService.getCategories(pageable, keyword);
+    }
+
+    @PutMapping("")
+    public Category modifyCategories(@RequestBody CategoryDTO categoryDTO) {
+        return categoryService.modifyCategories(categoryDTO);
     }
 }
 // POST http://localhost:8080/categories 로 메세지를 보내 확인해보자.
