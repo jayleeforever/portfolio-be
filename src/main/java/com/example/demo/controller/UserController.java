@@ -49,8 +49,8 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<Category> getCategoryByAll(){
-        return categoryService.getCategoryByAll();
+    public List<Category> getCategoryAll(){
+        return categoryService.getCategoryAll();
     }
 }
 // POST http://localhost:8080/categories 로 메세지를 보내 확인해보자.
