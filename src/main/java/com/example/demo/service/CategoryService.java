@@ -30,6 +30,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    //Create
     // @Transactional 은 Exception이 발생하면 데이터베이스를 롤백해주는 기능을 제공한다.
     @Transactional
     public Category createCategory(CategoryDTO categoryDTO){
@@ -48,6 +49,7 @@ public class CategoryService {
         return category;
     }
 
+    // Read 1
     // getCateogoryById라는 메서드를 추가해보자.
     //
     //`orElseThrow` 는 optional 객체에서 제공해주는 메서드로
@@ -57,14 +59,18 @@ public class CategoryService {
     //없다면 Exception을 발생 시킨다.
     //
     //여기서 NOT_FOUND Exception을 발생시켰다.
-
     public Category getCategoryById(Long id){
         return categoryRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리가 존재하지 않습니다."));
     }
 
-
+    // Read all
     public List<Category> getCategoryAll(){
         return categoryRepository.findAll();
+    }
+
+    // delete
+    public void deleteCategory(Long id){
+        categoryRepository.deleteById(id);
     }
 }

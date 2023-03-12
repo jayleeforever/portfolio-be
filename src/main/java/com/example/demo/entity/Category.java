@@ -9,6 +9,7 @@ import lombok.ToString;
 // @Entity 를 적용하면 JPA에서는 해당 정보를 통해 데이터베이스 테이블을 생성하고,
 // 테이블의 데이터를 가져올 수 있게된다. 각 변수 하나하나가 데이터베이스 Colum이 된다.
 @Entity
+@Table(name = "category")
 // @Getter getId, getName 같은 메서드를 자동으로 만들어주는 어노테이션이다.
 // Entity에는 Get이 있어야 제대로 동작한다
 @Getter

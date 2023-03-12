@@ -4,6 +4,7 @@ import com.example.demo.entity.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 // @Repository 는 데이터를 접근하는 객체를 만들때 생성한다.
@@ -19,4 +20,10 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     // Optional Optional 은 Null과 Category를 가질 수 있는 객체이다.
     // Null Check를 위한 메서드들을 제공해 준다. isEmpty, elseOrThrow, isPresent 등
     Optional<Category> findByName(String name);
+
+    //참고
+    //https://www.javaguides.net/2019/07/spring-boot-save-findbyid-findall.html
+    //    List<Category> findAll();
+
+
 }

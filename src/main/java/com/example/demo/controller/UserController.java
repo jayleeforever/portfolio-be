@@ -52,6 +52,11 @@ public class UserController {
     public List<Category> getCategoryAll(){
         return categoryService.getCategoryAll();
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategoryById(@PathVariable Long id) {
+        categoryService.deleteCategory(id);
+    }
 }
 // POST http://localhost:8080/categories 로 메세지를 보내 확인해보자.
 // 데이터는 body에 raw application/json 으로 보낸다.:
