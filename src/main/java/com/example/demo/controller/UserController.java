@@ -1,15 +1,13 @@
 // 사용자로 부터 받은 데이터를 그대로 리턴해주는 API
 package com.example.demo.controller;
 
-import com.example.demo.controller.dto.CategoryDTO;
+import com.example.demo.dto.CategoryDTO;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 // @RestController
 // - Restful API를 만들때 사용하는 Controller 어노테이션
@@ -56,8 +54,8 @@ public class UserController {
 //    }
 
     @DeleteMapping("/{id}")
-    public void deleteCategoryById(@PathVariable Long id) {
-        categoryService.deleteCategory(id);
+    public Long deleteCategoryById(@PathVariable Long id) {
+        return categoryService.deleteCategoryById(id);
     }
 
     //데이터를 하나씩 가져오기도 하지만 우리는 Data를 여러개를 가져오기도 한다 이때 사용하는 것이 페이징이다.
@@ -76,8 +74,13 @@ public class UserController {
     //
     //`Page` 는 페이지 정보가 포함된 데이터이다. JPA에서 생성한다.
     @GetMapping("")
-    public Page<Category> getCategories(Pageable pageable, @RequestParam String keyword){
+    public Page<Category> getCategories(Pageable pageable, @RequestParam(value="keyword", required=false) String keyword){
         return categoryService.getCategories(pageable, keyword);
+    }
+
+    @PutMapping("")
+    public Category modifyCategories(@RequestBody CategoryDTO categoryDTO) {
+        return categoryService.modifyCategories(categoryDTO);
     }
 }
 // POST http://localhost:8080/categories 로 메세지를 보내 확인해보자.
