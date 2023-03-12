@@ -1,7 +1,7 @@
 // Data Transfer Object의 약자로 API로 데이터 전송시 사용하는 데이터와,
 // Spring 프로젝트 내에서 Component끼리 데이터를 보낼때 사용하는 데이터를 의미
 // 사용자의 회원가입 요청을 받고 리턴해주기 위해 생성
-package com.example.demo.controller.dto;
+package com.example.demo.dto;
 
 import lombok.Data;
 

@@ -7,12 +7,11 @@
 // Controller에 로직이 있으면 로직이 중복되기 때문에 Controller에서는 비즈니스 로직을 처리하지 않는다)
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.CategoryDTO;
+import com.example.demo.dto.CategoryDTO;
 import com.example.demo.entity.Category;
 import com.example.demo.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;

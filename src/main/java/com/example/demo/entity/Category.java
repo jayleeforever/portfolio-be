@@ -1,10 +1,8 @@
 package com.example.demo.entity;
 
-import com.example.demo.controller.dto.CategoryDTO;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 // @Entity 를 적용하면 JPA에서는 해당 정보를 통해 데이터베이스 테이블을 생성하고,

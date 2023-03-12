@@ -1,14 +1,11 @@
 package com.example.demo.repository;
 
-import com.example.demo.controller.dto.CategoryDTO;
 import com.example.demo.entity.Category;
-import jakarta.persistence.PersistenceContext;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 // @Repository 는 데이터를 접근하는 객체를 만들때 생성한다.

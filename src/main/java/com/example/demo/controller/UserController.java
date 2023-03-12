@@ -1,15 +1,13 @@
 // 사용자로 부터 받은 데이터를 그대로 리턴해주는 API
 package com.example.demo.controller;
 
-import com.example.demo.controller.dto.CategoryDTO;
+import com.example.demo.dto.CategoryDTO;
 import com.example.demo.entity.Category;
 import com.example.demo.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 // @RestController
 // - Restful API를 만들때 사용하는 Controller 어노테이션
