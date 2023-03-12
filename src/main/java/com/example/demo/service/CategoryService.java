@@ -12,10 +12,12 @@ import com.example.demo.entity.Category;
 import com.example.demo.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.List;
 import java.util.Optional;
 
 // @Service 는 서비스 컴포넌트를 만들때 사용한다. Service에서는 @Transactional 을 사용할 수 있다.
@@ -25,6 +27,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class CategoryService {
     // CategoryRepository 는 우리가 생성을 안하였지만 Spring에서 Bean을 검색하여 DI 를 통해 주입해준다.
+
     private final CategoryRepository categoryRepository;
 
     // @Transactional 은 Exception이 발생하면 데이터베이스를 롤백해주는 기능을 제공한다.
@@ -54,8 +57,14 @@ public class CategoryService {
     //없다면 Exception을 발생 시킨다.
     //
     //여기서 NOT_FOUND Exception을 발생시켰다.
+
     public Category getCategoryById(Long id){
         return categoryRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "카테고리가 존재하지 않습니다."));
+    }
+
+
+    public List<Category> getCategoryByAll(){
+        return categoryRepository.findAll();
     }
 }

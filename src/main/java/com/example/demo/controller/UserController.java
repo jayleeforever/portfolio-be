@@ -7,6 +7,8 @@ import com.example.demo.service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 // @RestController
 // - Restful API를 만들때 사용하는 Controller 어노테이션
 //    - 모든 데이터는 요청과 응답의 body는 json으로 전송하도록 한다.
@@ -44,6 +46,11 @@ public class UserController {
     @GetMapping("/{id}")
     public Category getCategoryById(@PathVariable Long id){
         return categoryService.getCategoryById(id);
+    }
+
+    @GetMapping("")
+    public List<Category> getCategoryByAll(){
+        return categoryService.getCategoryByAll();
     }
 }
 // POST http://localhost:8080/categories 로 메세지를 보내 확인해보자.
