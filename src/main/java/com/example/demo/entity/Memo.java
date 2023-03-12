@@ -22,7 +22,7 @@ public class Memo {
     @JoinColumn(name = "category_id")
     Category category;
 
-    @Column(lengh = 100)
+    @Column(length = 100)
     String name;
 
     // columnDefinition 은 타입을 지정해 줄 떄 사용한다. TEXT 는 사이즈 제한이 없는 텍스트를 저장할떄 사용된다.

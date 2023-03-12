@@ -3,6 +3,7 @@ package com.example.demo.entity;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 // @Entity 를 적용하면 JPA에서는 해당 정보를 통해 데이터베이스 테이블을 생성하고,
@@ -12,6 +13,10 @@ import lombok.ToString;
 // Entity에는 Get이 있어야 제대로 동작한다
 @Getter
 @ToString
+// http://localhost:8080/categories/1 요청시
+// 다음과 같은 에러나서 추가
+// No default constructor for entity:
+@NoArgsConstructor
 public class Category {
     // @Id 는 PrimaryKey를 의미한다. id는 PrimaryKey가 된다.
     @Id

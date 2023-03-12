@@ -19,4 +19,5 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     // Optional Optional 은 Null과 Category를 가질 수 있는 객체이다.
     // Null Check를 위한 메서드들을 제공해 준다. isEmpty, elseOrThrow, isPresent 등
     Optional<Category> findByName(String name);
+
 }
