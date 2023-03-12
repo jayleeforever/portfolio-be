@@ -7,12 +7,11 @@
 // Controller에 로직이 있으면 로직이 중복되기 때문에 Controller에서는 비즈니스 로직을 처리하지 않는다)
 package com.example.demo.service;
 
-import com.example.demo.controller.dto.CategoryDTO;
+import com.example.demo.dto.CategoryDTO;
 import com.example.demo.entity.Category;
 import com.example.demo.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -47,6 +46,7 @@ public class CategoryService {
                 name(categoryDTO.getName()).
                 build();
         category = categoryRepository.save(category); // 아니면 category 생성하기
+//        category = categoryRepository.save(category); // 아니면 category 생성하기
 
         return category;
     }
@@ -72,8 +72,10 @@ public class CategoryService {
     }
 
     // delete
-    public void deleteCategory(Long id){
+    @Transactional
+    public Long deleteCategoryById(Long id){
         categoryRepository.deleteById(id);
+        return id;
     }
 
     // keyWord가 있다면 `findAll` 메서드를 호출하고 아니라면 findByNameContains메서드를 호출하였다.
@@ -82,10 +84,30 @@ public class CategoryService {
     //
     //findAll 메서드는 데이터 전체를 가져오는 메서드로 사전에 만들어져있다. Pageable을 추가하면 페이지 요청에 맞게 데이터를 검색한다.
     public Page<Category> getCategories(Pageable pageable, String keyword) {
-        if(keyword == null){
+        if (keyword == null){
+            System.out.println("keyword is null");
             return categoryRepository.findAll(pageable);
-        } else {
-            return categoryRepository.findByNameContains(pageable, keyword);
         }
+        return categoryRepository.findByNameContains(pageable, keyword);
+    }
+
+    @Transactional
+    public Category modifyCategories(CategoryDTO categoryDTO) {
+        if(categoryDTO.getName() == null || categoryDTO.equals(""))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "비어있음");
+        // Repository에서 데이터 가져오기
+        Optional<Category> findOne = categoryRepository.findById(categoryDTO.getId());
+        if(!findOne.isPresent()){ //데이터가 이미 존재하면 Exception을 발생시키고 종료
+            // Repository에서 가져온 데이터가 존재하면  ResponseStatusException 를 리턴해주는데
+            // 이는 Controller에서 HTTP 에러 응답을 하게 하는 Exception이다, HTTP code와 메세지를 적으면된다.
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "카테고리가 존재하지 않습니다.");
+        }
+
+        Category category = Category.builder()
+                .id(categoryDTO.getId())
+                .name(categoryDTO.getName())
+                .build();
+
+        return categoryRepository.save(category);
     }
 }
