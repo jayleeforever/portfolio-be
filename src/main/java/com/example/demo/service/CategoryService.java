@@ -13,6 +13,8 @@ import com.example.demo.repository.CategoryRepository;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -72,5 +74,18 @@ public class CategoryService {
     // delete
     public void deleteCategory(Long id){
         categoryRepository.deleteById(id);
+    }
+
+    // keyWord가 있다면 `findAll` 메서드를 호출하고 아니라면 findByNameContains메서드를 호출하였다.
+    //
+    //이는 나중에 실습을 들어가면 QueryDSL로 변경할 것이다.
+    //
+    //findAll 메서드는 데이터 전체를 가져오는 메서드로 사전에 만들어져있다. Pageable을 추가하면 페이지 요청에 맞게 데이터를 검색한다.
+    public Page<Category> getCategories(Pageable pageable, String keyword) {
+        if(keyword == null){
+            return categoryRepository.findAll(pageable);
+        } else {
+            return categoryRepository.findByNameContains(pageable, keyword);
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.example.demo.repository;
 
 import com.example.demo.entity.Category;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -25,5 +27,9 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     //https://www.javaguides.net/2019/07/spring-boot-save-findbyid-findall.html
     //    List<Category> findAll();
 
+    // findByName으로 하면 이름이 같은 데이터를 가져오지면 findByNameContains 를하면 검색하는 이름이 포함된 데이터를 전부 가져온다.
+    //
+    //Pageable을 파라미터로 넣으면 페이징 요청을 실행할 수 있고, Page를 리턴으로 받으면 페이지 정보가 포함된 리스트를 응답으로 보내줄 수 있다.
+    Page<Category> findByNameContains(Pageable pageable, String name);
 
 }
